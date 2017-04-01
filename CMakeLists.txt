@@ -3,8 +3,6 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 set(PROJECT qhttp_p)
 project(${PROJECT})
 
-add_definitions(-DQHTTP_HAS_CLIENT)
-
 if (MSVC)
         # Options for Visual Studio can be added here
 elseif (CMAKE_COMPILER_IS_GNUCXX)

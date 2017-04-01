@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 set(PROJECT qhttp)
 project(${PROJECT})
 
-option (QHTTP_HAS_CLIENT "Build client part" ON)
+OPTION (QHTTP_HAS_CLIENT "Build client part" ON)
 OPTION(${PROJECT}_BUILD_SHARED "Build ${PROJECT} as shared libraries" ON)
 
 
@@ -42,21 +42,22 @@ SET(Project_headers
     qhttpserver.hpp
 )
 
-if(QHTTP_HAS_CLIENT)
-SET(Project_sources
-	${Project_sources}
-        qhttpclientrequest.cpp 
-        qhttpclientresponse.cpp 
-        qhttpclient.cpp
-)
+if(${QHTTP_HAS_CLIENT})
+    add_definitions(-DQHTTP_HAS_CLIENT)
+    SET(Project_sources
+            ${Project_sources}
+            qhttpclientrequest.cpp
+            qhttpclientresponse.cpp
+            qhttpclient.cpp
+    )
 
-SET(Project_headers
-    ${Project_headers}
-    qhttpclient.hpp 
-        qhttpclientresponse.hpp 
-        qhttpclientrequest.hpp
-)
-endif(QHTTP_HAS_CLIENT)
+    SET(Project_headers
+        ${Project_headers}
+        qhttpclient.hpp
+            qhttpclientresponse.hpp
+            qhttpclientrequest.hpp
+    )
+endif()
 
 source_group ("Headers" FILES ${Project_headers})
 source_group ("Sources" FILES ${Project_sources})
