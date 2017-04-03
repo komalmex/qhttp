@@ -84,7 +84,7 @@ public:
         TImpl* me = static_cast<TImpl*>(this);
         me->prepareHeadersToWrite();
 
-        TBase::iheaders.forEach([this](const auto& cit) {
+        TBase::iheaders.forEach([this](QHash<QByteArray, QByteArray>::const_iterator cit) {
             this->writeHeader(cit.key(), cit.value());
         });
 

@@ -30,8 +30,8 @@ namespace qhttp {
 ///////////////////////////////////////////////////////////////////////////////
 
 /// QHash/QMap iterators are incompatibility with range for
-template<class Iterator, class Func>
-void for_each(Iterator first, Iterator last, Func&& f) {
+template<class Iterator>
+void for_each(Iterator first, Iterator last, std::function<void(Iterator)> f) {
     while ( first != last ) {
         f( first );
         ++first;
@@ -56,8 +56,7 @@ public:
         return qstrnicmp(value.constData(), v.constData(), v.size()) == 0;
     }
 
-    template<class Func>
-    void forEach(Func&& f) const {
+    void forEach(std::function<void(QHash<QByteArray, QByteArray>::const_iterator)> f) const {
         for_each(constBegin(), constEnd(), f);
     }
 };
